@@ -69,11 +69,14 @@ void mian_loop() {
 		// GetAddressData(0x1451238C8, 'int') + GetAddressData(pointer:Player() + 0x10, 'int') * 0xf8 + 0x9c
 		float* speedMultiplier = (float*)(*(int*)0x1451238C8 + *offsetPtr<int>(PlayerBase, 0x10) * 0xf8 + 0x9c);
 		float wildSpeedMultiplier = 1.6923;
-		if (lmtID == 49322 && *speedMultiplier < wildSpeedMultiplier)
+		//LOG(INFO) << "lmtID: " << lmtID;
+		if (lmtID == 49322 || lmtID == 49509 || lmtID == 49516)
 		{
-			*speedMultiplier = wildSpeedMultiplier;
-		}
-		if (lmtID != 49322 && *speedMultiplier > 1)
+			if (*speedMultiplier < wildSpeedMultiplier)
+			{
+				*speedMultiplier = wildSpeedMultiplier;
+			}
+		} else if (*speedMultiplier > 1)
 		{
 			*speedMultiplier = 1;
 		}
